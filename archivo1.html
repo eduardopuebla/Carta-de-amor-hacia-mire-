@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carta con Estrellas</title>
+    <!-- Importar fuente caligráfica de Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+    <style>
+        /* Fondo negro con estrellas */
+        body {
+            background-color: black; /* Fondo negro */
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        /* Estrellas animadas */
+        .estrella {
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+            animation: estrellaSubir 15s infinite linear; /* Aumenté la duración para que se muevan más lento */
+        }
+
+        /* Animación para las estrellas */
+        @keyframes estrellaSubir {
+            0% {
+                transform: translateY(100vh);
+                opacity: 0.8;
+            }
+            50% {
+                transform: translateY(-100vh);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh);
+                opacity: 0.8;
+            }
+        }
+
+        /* Estilo para la carta */
+        .carta {
+            display: none;
+            font-family: 'Dancing Script', cursive; /* Fuente caligráfica */
+            font-size: 28px;
+            width: 600px;
+            max-width: 90%;
+            min-height: 400px;
+            padding: 30px;
+            border-radius: 20px;
+            background-color: #f8e8e6;  /* Fondo suave para la carta */
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.2); /* Sombra suave */
+            border: 10px solid #ff66b3; /* Borde romántico con color rosa */
+            text-align: center;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+            position: relative;
+        }
+
+        /* Decoración adicional para la carta */
+        .carta h2 {
+            font-size: 36px;
+            color: #ff0066;
+            font-family: 'Dancing Script', cursive; /* Fuente caligráfica también para el título */
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5); /* Sombra de texto */
+        }
+
+        .carta pre {
+            font-size: 24px;
+            line-height: 1.5;
+            white-space: pre-wrap;
+            margin: 20px 0;
+            color: #333;
+            font-family: 'Arial', sans-serif;
+            text-align: left;
+        }
+
+        /* Ajuste de la imagen */
+        .carta img {
+            width: 100%;
+            height: auto;
+            object-fit: cover; /* Asegura que la imagen cubra el área sin distorsionarse */
+            border-radius: 10px;
+            margin-top: 20px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3); /* Sombra en la imagen */
+        }
+
+        /* Estilo del sobre */
+        .sobre {
+            cursor: pointer;
+            width: 350px;
+            height: 350px;
+            background-color: #fff;
+            border-radius: 20px;
+            position: relative;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 1;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        /* Icono del sobre */
+        .sobre-icono {
+            font-size: 250px;
+            transition: opacity 0.5s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Contenedor para el sobre -->
+    <div id="sobre" class="sobre">
+        <div class="sobre-icono">✉️</div>
+    </div>
+
+    <!-- Carta que aparece después de hacer clic en el sobre -->
+    <div id="carta" class="carta"></div>
+
+    <!-- Estrellas animadas -->
+    <div class="estrella" style="top: 10%; left: 20%; width: 5px; height: 5px; animation-duration: 20s;"></div>
+    <div class="estrella" style="top: 20%; left: 50%; width: 3px; height: 3px; animation-duration: 15s;"></div>
+    <div class="estrella" style="top: 30%; left: 80%; width: 7px; height: 7px; animation-duration: 18s;"></div>
+    <div class="estrella" style="top: 40%; left: 30%; width: 4px; height: 4px; animation-duration: 22s;"></div>
+    <div class="estrella" style="top: 50%; left: 70%; width: 6px; height: 6px; animation-duration: 16s;"></div>
+
+    <!-- Música de fondo -->
+    <audio id="audioFondo" loop>
+        <source src="ruta/a/tu/cancion.mp3" type="audio/mp3"> <!-- Asegúrate de reemplazar esta ruta por el enlace correcto -->
+        Tu navegador no soporta la etiqueta de audio.
+    </audio>
+
+    <script>
+        // Función para generar la carta
+        function generarCarta() {
+            const mensaje = `Te escribo esta carta para decirte lo mucho que te amo y sepas lo importante que eres para mí. 
+Eres una persona increíble y me hace feliz al ver tu sonrisa linda y tus ojos hermosos. 
+Quiero que no olvides lo increíble que eres para mí y lo mucho que te admiro. 
+En verdad, te amo muchísimo, eres el amor de mi vida.`;
+
+            // URL de la imagen que quieres mostrar
+            const imagenUrl = "https://img.posterstore.com/zoom/18197-8snoopylove50x70-23204-14418.jpg";  // Imagen que proporcionaste
+
+            // Generamos el contenido HTML para la carta sin "Atentamente" ni nombre
+            const carta = `
+                <h2>PARA LA MEJOR NOVIA</h2>
+                <pre>${mensaje}</pre>
+                <img src="${imagenUrl}" alt="Imagen de la carta">
+            `;
+
+            // Insertamos el contenido generado dentro del div con id "carta"
+            document.getElementById("carta").innerHTML = carta;
+
+            // Hacemos visible la carta con animación
+            const cartaDiv = document.getElementById("carta");
+            cartaDiv.style.display = "block"; // Asegurarse de que el contenedor de la carta sea visible
+            setTimeout(() => {
+                cartaDiv.style.opacity = "1"; // Hacerla visible de forma gradual
+                cartaDiv.style.transform = "translateY(0)"; // Deslizar hacia la posición final
+            }, 100);
+        }
+
+        // Función para abrir el sobre al hacer clic
+        document.getElementById("sobre").addEventListener("click", function() {
+            // Animación del sobre: Desvanecer el icono y el sobre
+            const sobreIcono = document.querySelector(".sobre-icono");
+            sobreIcono.style.opacity = 0;  // Hacer desaparecer el icono
+
+            // Reproducir la música al hacer clic
+            const audio = document.getElementById("audioFondo");
+            audio.play();  // Reproducir música
+
+            // Llamamos a la función para mostrar la carta con animación
+            generarCarta();
+
+            // Después de hacer clic, hacemos que el sobre desaparezca completamente
+            setTimeout(() => {
+                document.getElementById("sobre").style.opacity = 0;
+            }, 500); // Esperamos a que termine la animación del icono
+        });
+    </script>
+
+</body>
+</html>
